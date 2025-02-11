@@ -1,23 +1,37 @@
 package com.game.entity;
 
+
+import jakarta.persistence.*;
+import org.hibernate.annotations.BatchSize;
 import java.util.Date;
-
-
+@Entity
+@NamedQuery(name = "countPlayer", query = "SELECT COUNT(*) FROM Player")
 public class Player {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 12, nullable = false)
     private String name;
 
+    @Column(length = 30, nullable = false)
     private String title;
 
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
     private Race race;
 
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
     private Profession profession;
 
+    @Column(nullable = false)
     private Date birthday;
 
+    @Column(nullable = false)
     private Boolean banned;
 
+    @Column(nullable = false)
     private Integer level;
 
     public Player() {
@@ -33,7 +47,6 @@ public class Player {
         this.banned = banned;
         this.level = level;
     }
-
     public Long getId() {
         return id;
     }
@@ -97,4 +110,5 @@ public class Player {
     public void setLevel(Integer level) {
         this.level = level;
     }
+
 }
